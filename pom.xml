@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ups.ops.oms.batch.mdc</groupId>
+	<artifactId>oms-order-mdc-batch-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>oms-order-mdc-batch-service</name>
+	<description>oms-order-mdc-batch-service</description>
+	
+	<inceptionYear>2017</inceptionYear>
+	<licenses>
+		<license>
+			<comments>
+                NOTICE: Confidential, unpublished property of United Parcel Service. Use and distribution limited
+                solely to authorized personnel. The use, disclosure, reproduction, modification, transfer, or
+                transmittal of this work for any purpose in any form or by any means without the written permission of
+                United Parcel Service is strictly prohibited.
+
+                Copyright (c) 2016-2017, United Parcel Service of America, Inc.
+
+                All Rights Reserved.
+            </comments>
+		</license>
+	</licenses>
+	<organization>
+		<name>UPS</name>
+		<url>www.ups.com</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Subramanian Chempakaraman</name>
+			<email>schempakaraman@ups.com</email>
+			<id>gzk3scs</id>
+			<roles>
+				<role>Application Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+    <repositories>
+        <repository>
+            <id>ups-third-party</id>
+            <name>ups-third-party</name>
+            <url>https://nexusrm.ups.com:8443/repository/ups-third-party/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        
+         <repository>
+            <id>ups-releases</id>
+            <name>ups-releases</name>
+            <url>https://nexusrm.ups.com:8443/repository/ups-releases/</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>maven-central</id>
+            <name>maven-central</name>
+            <url>https://nexusrm.ups.com:8443/repository/maven-central/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.1.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Dalston.SR2</spring-cloud.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging-api</artifactId>
+			<version>1.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>6.1.0.jre8</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.ups.ops.oms</groupId>
+	    	<artifactId>OMSCommonArtifact</artifactId>
+	    	<version>1.3</version>
+		</dependency> 
+
+		<dependency>
+			<groupId>org.meanbean</groupId>
+			<artifactId>meanbean</artifactId>
+			<version>2.0.3</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+		<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<build.profile.id>local</build.profile.id>
+				<profileActive>local</profileActive>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<build.profile.id>dev</build.profile.id>
+				<profileActive>dev</profileActive>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<build.profile.id>test</build.profile.id>
+				<profileActive>test</profileActive>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<build.profile.id>prod</build.profile.id>
+				<profileActive>prod</profileActive>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>
