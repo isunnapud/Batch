@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
+	<logger name="com.ups.ops" level="DEBUG"/>
+	<logger name="org.springframework" level="ERROR"/>
+	<logger name="org.apache" level="INFO"/>
+	<logger name="org.hibernate" level="ERROR"/>
+	<logger name="org.activemq" level="ERROR"/>
+	<logger name="org.meanbean" level="ERROR"/>
+	<logger name="com.zaxxer.hikari" level="ERROR"/>
+	<!-- You can override this to have a custom pattern -->
+	<property name="CONSOLE_LOG_PATTERN"
+	value="%clr([oms-mdc-batch-service]- ){yellow} %clr(%thread -){green} %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){yellow} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){green} %clr([%1M]){magenta} %clr(--){faint}  %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+			  
+
+	<!-- Appender to log to console -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<!-- Minimum logging level to be presented in the console logs-->
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	
+	<root level="DEBUG">
+		<appender-ref ref="console"/>
+		<!-- uncomment this to have also JSON logs -->
+	<!-- 	<appender-ref ref="jsonconsole"/> -->
+	</root>
+</configuration>
